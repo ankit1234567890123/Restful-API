@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+   <head>
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<link rel="stylesheet" href="./stylesheets/style.css">
+   </head>
+   
+   <body ng-app="myApp" ng-controller="myCtrl">
+		<div>
+		<h2><center> Nobel Prize Winners </center></h2>
+		<div class="table" ng-init = "init()">		  
+			<div class="row">
+				<span class="headerCell">Sr.No.</span>
+				<span class="headerCell">Year</span>
+				<span class="headerCell">Name</span>
+				<span class="headerCell">Category</span>
+				<span class="headerCell">Country</span>			
+			</div>
+			<div class="rowGroup" id="row">				
+			</div>
+		</div>
+		<br/>		
+      </div>
+      
+	  <script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope, $http, $timeout) {
+			$scope.trigger=false;
+			$scope.nobelData={};
+			$scope.dataRequest = function(i){
+				$http.get('/data',{params: {id : i}}).then(
+					function (response) { 
+						$scope.nobelData = response.data;
+						console.log(i);
+						if(i > 20){
+							var remove_id = i - 20;
+							var remove_element = angular.element( document.querySelector( '#a'+remove_id ) );
+							remove_element.remove();							
+						}
+						var row_Group = angular.element( document.querySelector( '#row' ) );
+						row_Group.append('<div class="row" id=a'+i+'><span class="cell" >'+$scope.nobelData.Id+'</span><span class="cell" >'+$scope.nobelData.Year+'</span><span class="cell">'+$scope.nobelData.Name+'</span><span class="cell">'+$scope.nobelData.Category+'</span><span class="cell">'+$scope.nobelData.County+'</span></div>');
+					},
+					function (failure) { console.log("failed :(", failure); }
+				);
+			};
+			$scope.init = function(){		
+				for(var i=1;i<=100;i++){	
+					(function(i){
+						$timeout( function(){ $scope.data = $scope.dataRequest(i); }, 500*i);
+					})(i);
+				}				
+			};				
+		});
+		
+	  </script>
+   </body>
+</html>
