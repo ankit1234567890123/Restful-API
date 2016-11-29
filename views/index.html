@@ -28,7 +28,7 @@
 			$scope.trigger=false;
 			$scope.nobelData={};
 			$scope.dataRequest = function(i){
-				$http.get('/data',{params: {id : i}}).then(
+				$http.get('https://cse5335-aas6113.herokuapp.com/data',{params: {id : i}}).then(
 					function (response) { 
 						$scope.nobelData = response.data;
 						console.log(i);
