@@ -6,7 +6,8 @@ var database;
 
 
 router.get('/', function(req, res, next) {
-	MongoClient.connect("mongodb://localhost:27017/mydb", function(err, db) {
+	//MongoClient.connect("mongodb://localhost:27017/mydb", function(err, db) {
+	MongoClient.connect("mongodb://ankit:ankit@ds113678.mlab.com:13678/heroku_1kt0jn7x", function(err, db) {
 		if(!err) {
 			database = db;
 			console.log("We are connected");
