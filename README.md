@@ -1,8 +1,6 @@
-# CSE5335-aas6113
+# RestFul API Server Client Implementation using NodeJS and MongoDB
 
 Name - Ankit Anil Shingavi
-
-Student Id - 1001366113
 
 Project Link - https://cse5335-aas6113.herokuapp.com/
 
